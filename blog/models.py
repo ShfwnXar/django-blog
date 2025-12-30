@@ -33,3 +33,25 @@ class Comment(models.Model):
         self.save()
     def __str__(self):
         return self.text
+
+#jawaban no 3.12 about pada blog
+from django.db import models
+
+class About(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    image = models.ImageField(upload_to='about/', blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "About Page"
+        verbose_name_plural = "About Page"
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.pk and About.objects.exists():
+            raise ValueError("Hanya boleh ada satu halaman About")
+        return super().save(*args, **kwargs)
+

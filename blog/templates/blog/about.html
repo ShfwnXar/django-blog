@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% block title %} About - {{block.super }}{% endblock %}
+{% block content %}
+<div class="about-page">
+    {% if about %}
+        <h1>{{ about.title }}</h1>
+        {% if about.image %}
+            <img src="{{ about.image.url}}" alt="{{ about.title }}" style="max-width: 100%; height: auto; margin: 20px 0;">
+        {% endif %}
+    <div class="about-content">
+        {{ about.content|linebreaks }}
+    </div>
+    <p style="color: #666; margin-top: 20px;">Last updated: {{about.updated_at | date:"F d, Y" }}</p>
+    {% else %}
+        <h1>About</h1>
+        <p>Saya shafwan aulia rahman mahasiswa pendidikan teknik informatika fkip ums dengan nim A710230043</p>
+    {% endif %}
+</div>
+{% endblock %}
